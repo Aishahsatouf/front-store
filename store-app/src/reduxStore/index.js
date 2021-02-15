@@ -1,11 +1,11 @@
 // and adding reducers to it
 import products from './productsReducer.js'
 import categories from './categoriesReducer.js'
-
+import cart from './cartReducer'
 import {createStore, combineReducers} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 // add as many reducers as you want
-let reducers = combineReducers({categories, products});
+let reducers = combineReducers({categories, products,cart});
 
 const store = () => {
     return createStore(reducers, composeWithDevTools())

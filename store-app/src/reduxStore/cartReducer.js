@@ -1,6 +1,6 @@
 let initalState = {
     products: [
-        { name: 'TV', category: 'electronics', price: 699.00, inStock: 5 },
+        { name: 'TV', category: 'electronics', price: 699.00,  inStock: 5},
         { name: 'Camera', category: 'electronics', price: 400.00, inStock: 3 },
         { name: 'Radio', category: 'electronics', price: 99.00, inStock: 15 },
         { name: 'Shirt', category: 'clothing', price: 9.00, inStock: 25 },
@@ -14,9 +14,7 @@ let initalState = {
     numAdded:0
 
 
-
 };
-
 
 
 export default (state = initalState, action) => {
@@ -26,32 +24,20 @@ export default (state = initalState, action) => {
     console.log("state ---> ", state)
     let { type, payload } = action;
     switch (type) {
-        case 'ACTIVE':
-            // increment a specific canidates votes
-            // let activeCategories = state.activeCategories;
-            let filetredProduct = state.products.filter(product => {
-                if (product.category == payload) {
-                    return product.category;
-                }
-            });
-            return { ...state, filetredProduct };
 
         case 'ADDEDTOCART':
-            let products = state.products.map(item => {
-                
-                if (item.name == payload) {
-                    console.log('from added to cart--> in Stock ?? ' , item.inStock)
-                   item.inStock = item.inStock - 1;
-
-                    console.log('from added to cart-->  afterrrrrrrrrrrr in Stock ?? ' , item.inStock)
-                    return item
-                    //try added outside if ! 
-                }else{
-                    return item 
+           
+          
+            const productsInCart =  state.products.filter(product => {
+                if (product.name == payload) {
+                    return product;
                 }
             });
-
-            return { ...state, products}
+            let newState = productsInCart[0];
+            console.log('from added to cart--> new state ' , newState)
+            return { ...state, productsInCart:[...state.productsInCart,newState] };
+          
+    
 
         default:
             return state;
