@@ -34,18 +34,19 @@ const Status = props => {
     return (
         <>
             <section>
-                        {props.filetredProduct.map((product, idx) => {
-              return  <Card className={classes.root} variant="outlined">
-                    <CardContent>
-                             <Typography className={classes.title} key={idx} color="textSecondary" gutterBottom>
+                {props.filetredProduct.map((product, idx) => {
+                    return <Card className={classes.root} variant="outlined">
+                        <CardContent>
+                            <Typography className={classes.title} key={idx} color="textSecondary" gutterBottom>
                                 {product.name}
                             </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Button size="small">View details</Button>
-                    </CardActions>
-                </Card>
-                        })}
+                        </CardContent>
+                        <CardActions>
+                            <Button onClick={()=>{}}>Add To Cart</Button>
+                            <Button size="small">View details</Button>
+                        </CardActions>
+                    </Card>
+                })}
             </section>
         </>
     )

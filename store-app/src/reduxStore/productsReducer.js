@@ -31,9 +31,23 @@ export default (state = initalState, action) => {
                 } 
             });
             return {...state,filetredProduct};
-            
+        case "ADDEDTOCART":
+            let products=state.products.map((product)=>{
+              if(payload==product.name){
+                  let inStock=product.inStock-1;
+                  return {name: product.name, category: product.category, price: product.price, inStock: inStock}
+              }
+            }); 
+            return {...state,products} ;
         default:
             return state;
     }
 
+}
+export const active = (name) => {
+    console.log("in added to cart  action name=", name);
+    return {
+        type: 'ADDEDTOCART',
+        payload: name
+    }
 }
