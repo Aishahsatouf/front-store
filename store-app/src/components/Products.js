@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { addedToCart } from '../reduxStore/productsReducer.js';
 
 const useStyles = makeStyles({
     root: {
@@ -42,7 +43,7 @@ const Status = props => {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button onClick={()=>{}}>Add To Cart</Button>
+                        <Button size="small" onClick={()=> props.addedToCart(product.name)}>Add To Cart</Button>
                             <Button size="small">View details</Button>
                         </CardActions>
                     </Card>
@@ -56,7 +57,12 @@ const Status = props => {
 // I will only use mapStateToProps
 const mapStateToProps = state => ({
     myProducts: state.products.products,
-    filetredProduct: state.products.filetredProduct
+    filetredProduct: state.products.filetredProduct,
+    myProductsInCart : state.products.productsInCart 
+
 });
 
-export default connect(mapStateToProps)(Status);
+const mapDispatchToProps = {addedToCart}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Status);

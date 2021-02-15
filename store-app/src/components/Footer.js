@@ -3,7 +3,7 @@ import { Tab, AppBar, Tabs, Typography } from '@material-ui/core'
 
 const Footer = () => {
     return (
-      <footer id='footer'>
+      <footer id='footer' >
       <AppBar position="static" style={{ background: '#2E3B55' }}>
           <p>© 2021 LTUC AMMAN</p>
       </AppBar>

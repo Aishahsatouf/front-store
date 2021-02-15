@@ -9,7 +9,11 @@ let initalState = {
         { name: 'Eggs', category: 'food', price: 1.99, inStock: 12 },
         { name: 'Bread', category: 'food', price: 2.39, inStock: 90 },
     ],
-    filetredProduct:[]
+    filetredProduct: [],
+    productsInCart:[],
+    numAdded:0
+
+
 
 };
 
@@ -20,32 +24,41 @@ export default (state = initalState, action) => {
     // increment, decrement, reset votes action
     console.log("action in reducer ---> ", action)
     console.log("state ---> ", state)
-    let {type, payload} = action;
-    switch(type) {
+    let { type, payload } = action;
+    switch (type) {
         case 'ACTIVE':
             // increment a specific canidates votes
             // let activeCategories = state.activeCategories;
-            let filetredProduct = state.products.filter(product=> {
-                if (product.category == payload) {     
+            let filetredProduct = state.products.filter(product => {
+                if (product.category == payload) {
                     return product.category;
-                } 
+                }
             });
-            return {...state,filetredProduct};
-        case "ADDEDTOCART":
-            let products=state.products.map((product)=>{
-              if(payload==product.name){
-                  let inStock=product.inStock-1;
-                  return {name: product.name, category: product.category, price: product.price, inStock: inStock}
-              }
-            }); 
-            return {...state,products} ;
+            return { ...state, filetredProduct };
+
+        case 'ADDEDTOCART':
+            let products = state.products.map(item => {
+                
+                if (item.name == payload) {
+                    console.log('from added to cart--> in Stock ?? ' , item.inStock)
+                   item.inStock = item.inStock - 1;
+
+                    console.log('from added to cart-->  afterrrrrrrrrrrr in Stock ?? ' , item.inStock)
+                    return item
+                    //try added outside if ! 
+                }else{
+                    return item 
+                }
+            });
+
+            return { ...state, products}
+
         default:
             return state;
     }
-
 }
-export const active = (name) => {
-    console.log("in added to cart  action name=", name);
+
+export const addedToCart = (name) => {
     return {
         type: 'ADDEDTOCART',
         payload: name
