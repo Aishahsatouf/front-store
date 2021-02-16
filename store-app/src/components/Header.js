@@ -2,7 +2,7 @@ import React from 'react';
 import { Tab, AppBar, Tabs, Typography } from '@material-ui/core'
 import '../styles/header.scss'
 import ItemInCart from './SimpleCart'
-// import {Link, NavLink} from 'react-router-dom';
+
 class Header extends React.Component {
     render() {
         return (
