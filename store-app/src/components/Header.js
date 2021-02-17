@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, AppBar, Tabs, Typography } from '@material-ui/core'
+import { Tabs,AppBar } from '@material-ui/core'
 import '../styles/header.scss'
 import ItemInCart from './SimpleCart'
 
@@ -12,7 +12,7 @@ class Header extends React.Component {
                     <Tabs aria-label="simple tabs example" indicatorColor="transparent" color='black'
                         textColor="transparent">
                             <h1>OUR STORE</h1>
-                            <ItemInCart/>
+                    <ItemInCart/>
                     </Tabs>
                 </AppBar>
 
