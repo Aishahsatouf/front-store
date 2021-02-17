@@ -1,15 +1,18 @@
-// import { Divider } from '@material-ui/core';
-import React,{useEffect} from 'react';
-import { connect } from 'react-redux';
-import { active } from '../reduxStore/categoriesReducer.js';
-import { Link, Typography } from '@material-ui/core'
-import * as actions from '../reduxStore/actions';
 
+import React,{useEffect} from 'react';
+import { connect,useDispatch } from 'react-redux';
+import { Link, Typography,Button } from '@material-ui/core'
+import { active,  getRemoteCategories  } from "../rtkStore/categoriesSlicer";
+import {activeProduct} from '../rtkStore/productsSlicer'
 const ActiveCategories = props => {
-    const fetchData = (e) => {
-        props.getcat();
-    }
-      useEffect(fetchData,[])
+    const dispatch = useDispatch();
+    useEffect(() => {
+    
+        const fetchData = async () => {
+          await dispatch( getRemoteCategories ());
+        };
+        fetchData();
+      }, [dispatch]);
     return (
         <>
             <div style={{ fontSize: '24px' }}>
@@ -21,7 +24,7 @@ const ActiveCategories = props => {
 
                     {props.activeOne.categories.map((category, idx) => {
 
-                        return <Link style={{borderLeft:"solid #2E3B55 4px",color:"#2E3B55" ,padding:"2px",magginRight:"25px"}} key={idx} onClick={() => props.active(category.name)} href="#">{category.name.toUpperCase()} </Link>
+                        return <Button onClick={()=>{props.activeProduct(category.name)}}><Link style={{borderLeft:"solid #2E3B55 4px",color:"#2E3B55" ,padding:"2px",magginRight:"25px"}} key={idx} value={category.name} onClick={()=>props.active(category.name)} href="#">{category.name.toUpperCase()} </Link></Button>
 
                     })}
                   
@@ -36,10 +39,13 @@ const ActiveCategories = props => {
 }
 
 const mapStateToProps = state => ({
-    activeOne: state.categories
+
+    active: state.categories.ActiveCategories,
+    activeOne: state.categories,
+    
 });
 const mapDispatchToProps = (dispatch, getState,string) => ({
-    getcat: () => dispatch(actions.getRemoteCategories()),
-    active: (string)=>dispatch(active(string))
+    active: (string)=>dispatch(active(string)),
+    activeProduct: (string)=>dispatch(activeProduct(string))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ActiveCategories)

@@ -1,7 +1,8 @@
 let initalState = {
     products: [],
     filetredProduct: [],
-    productsInCart: []
+    productsInCart: [],
+    productDetail:{}
     
 };
 
@@ -27,6 +28,10 @@ export default (state = initalState, action) => {
                 }
             });
             return { ...state, filetredProduct };
+        case 'GETDETAILS':
+            let productDetail=payload;
+            return {...state,productDetail};
+
         default:
             return state;
     }
